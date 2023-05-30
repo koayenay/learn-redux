@@ -1,28 +1,27 @@
 import React, { useState, useEffect } from "react"
 import { Card, Button } from "react-bootstrap"
 import "./product.css"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { add } from "../store/cartSlice"
+import { getProducts } from "../store/productSlice"
 
 const Product = () => {
   const dispatch = useDispatch()
-
-  const [products, setProducts] = useState([])
+  const { data: products, status } = useSelector((state) => state.products)
+  // const [products, getProducts] = useState([])
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("https://fakestoreapi.com/products")
-        const data = await response.json()
-        setProducts(data)
-      } catch (error) {
-        console.error("Error fetching products:", error)
-      }
-    }
-
-    fetchProducts()
+    // dispatch an action for fetchProducts
+    dispatch(getProducts())
   }, [])
 
+  if (status === "loading") {
+    return <p>Loading...</p>
+  }
+
+  if (status === "error") {
+    return <p>Something went wrong! Try again later</p>
+  }
   const addToCart = (product) => {
     // dispatch an add action
     dispatch(add(product))
