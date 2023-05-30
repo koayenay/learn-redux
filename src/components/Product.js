@@ -31,8 +31,11 @@ const Product = () => {
         <Card.Body>
           <Card.Title>{product.title}</Card.Title>
           <Card.Text>{product.price}</Card.Text>
-          <Button variant='primary'>Add To Cart</Button>
         </Card.Body>
+
+        <Card.Footer>
+          <Button variant='primary'>Add To Cart</Button>
+        </Card.Footer>
       </Card>
     </div>
   ))
@@ -46,4 +49,3 @@ const Product = () => {
 }
 
 export default Product
-https://youtu.be/A_vRvDAZuOo?t=1093
